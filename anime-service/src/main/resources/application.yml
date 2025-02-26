@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: anime-service
+  threads:
+    virtual:
+      enabled: true
+server:
+  servlet:
+    context-path: /
+    # /${spring.application.name} - placeholder que pega o valor do nome do projeto.
+  error:
+    include-stacktrace: ON_PARAM
+  tomcat:
+    threads:
+      max: 20
