@@ -8,7 +8,7 @@ import java.util.List;
 @RequestMapping("v1/heroes")
 public class HeroController {
 
-    private  static final List<String> HEROES = List.of("Guts", "Zara", "Kakashi", "Goku");
+    private static final List<String> HEROES = List.of("Guts", "Zara", "Kakashi", "Goku");
 
     @GetMapping
     public List<String> listAllHeroes() {
