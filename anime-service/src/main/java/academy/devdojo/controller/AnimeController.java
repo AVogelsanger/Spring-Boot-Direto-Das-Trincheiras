@@ -12,6 +12,18 @@ import java.util.List;
 @Slf4j
 public class AnimeController {
 
+
+    @GetMapping("meus-favoritos")
+    public List<String> name() {
+        List<String> animesName = new ArrayList<>();
+        animesName.add("Akira");
+        animesName.add("Ghost of Shell");
+        animesName.add("Seya");
+        animesName.add("Zilion");
+
+        return animesName;
+    }
+
     @GetMapping
     public List<String> listAll() {
         log.info(Thread.currentThread().getName());
