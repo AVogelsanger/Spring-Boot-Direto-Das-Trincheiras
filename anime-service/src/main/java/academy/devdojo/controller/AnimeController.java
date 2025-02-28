@@ -2,10 +2,13 @@ package academy.devdojo.controller;
 
 import academy.devdojo.domain.Anime;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping("v1/animes")
@@ -49,5 +52,30 @@ public class AnimeController {
                 .stream()
                 .filter(anime -> anime.getId().equals(id))
                 .findFirst().orElse(null);
+    }
+
+    @PostMapping("meu-jeito")
+    public Anime saveAnime(@RequestBody String body) {
+        var animes = Anime.getAnimes();
+        try {
+            JSONObject jsonObject = new JSONObject(body);
+            String name = jsonObject.getString("name");
+            Long id = animes.getLast().getId() + 1;
+            Anime anime = new Anime(id, name);
+            List<Anime> animeList = new ArrayList<>();
+            animeList.addAll(Anime.getAnimes());
+            animeList.add(anime);
+            log.info("save: '{}'", body);
+            return animeList.getLast();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping()
+    public Anime save(@RequestBody Anime anime) {
+        anime.setId(ThreadLocalRandom.current().nextLong(10_000));
+        Anime.getAnimes().add(anime);
+        return anime;
     }
 }
