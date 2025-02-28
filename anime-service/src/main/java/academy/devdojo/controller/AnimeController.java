@@ -62,11 +62,9 @@ public class AnimeController {
             String name = jsonObject.getString("name");
             Long id = animes.getLast().getId() + 1;
             Anime anime = new Anime(id, name);
-            List<Anime> animeList = new ArrayList<>();
-            animeList.addAll(Anime.getAnimes());
-            animeList.add(anime);
+            animes.add(anime);
             log.info("save: '{}'", body);
-            return animeList.getLast();
+            return animes.getLast();
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
