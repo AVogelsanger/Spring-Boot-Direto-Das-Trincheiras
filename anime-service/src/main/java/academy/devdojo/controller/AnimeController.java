@@ -41,8 +41,12 @@ public class AnimeController {
     }
 
     @GetMapping("exerc")
-    public List<Anime> listAllHeroes() {
-        return Anime.getAnimes();
+    public ResponseEntity<List<AnimeGetResponse>> listAllHeroes() {
+
+        var animes = Anime.getAnimes();
+        var animeGetResponseList = MAPPER.toAnimeGetResponseList(animes);
+
+        return ResponseEntity.ok(animeGetResponseList);
     }
 
     @GetMapping("filterName")
