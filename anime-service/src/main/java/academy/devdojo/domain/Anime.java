@@ -15,6 +15,7 @@ public class Anime {
     private String name;
 
     private static List<Anime> animes = new ArrayList<>();
+
     static {
         var naruto = new Anime(1L, "Naruto");
         var onePiece = new Anime(2L, "One Piece");
